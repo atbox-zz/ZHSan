@@ -224,7 +224,7 @@ namespace WorldOfTheThreeKingdoms
 
             Session.LoadContent(base.Content);
 
-            Session.PlayMusic("Start");
+            Session.PlayMusicWithFallback("StartROC", "Start");
             
         }
 

@@ -511,8 +511,7 @@ namespace GameManager
 
         public static void PlayMusic(string category)
         {
-            string[] songs = null;
-            songs = Platform.Current.GetMODFiles(@"Content\Music\" + category, true).NullToEmptyArray();
+            string[] songs = Platform.Current.GetMODFiles(@"Content\Music\" + category, true).NullToEmptyArray();
 
             Platform.Current.PlaySong(songs);
             //if (songs.Length > 0)
@@ -522,7 +521,17 @@ namespace GameManager
             //    string song = songs[index];
             //    Platform.Current.PlaySong(song);
             //}
+        }
 
+        public static void PlayMusicWithFallback(string preferredCategory, string fallbackCategory)
+        {
+            string[] songs = Platform.Current.GetMODFiles(@"Content\Music\" + preferredCategory, true).NullToEmptyArray();
+            if (songs.Length == 0)
+            {
+                songs = Platform.Current.GetMODFiles(@"Content\Music\" + fallbackCategory, true).NullToEmptyArray();
+            }
+
+            Platform.Current.PlaySong(songs);
         }
 
         public static void StopSong()
